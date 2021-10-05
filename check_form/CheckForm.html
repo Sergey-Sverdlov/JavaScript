@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Мультик</title>
+    <script type="text/javascript">
+        function valid(form) {
+            let fail = false;
+            let name = form.name.value;
+            let email = form.email.value;
+            let password = form.password.value;
+            let RePassword = form.RePassword.value;
+            const adr_pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            if (name === "" || name === " ") {
+                fail = "Вы не ввели свое имя";
+            }
+            else if (email === "") {
+                fail = "Вы не ввели email"
+            }
+            else if (!adr_pattern.test(email)) {
+                fail = 'Неверно введен Email';
+            }
+            else if (password === '') {
+                fail = "Вы не ввели пароль";
+            }
+            else if (password !== RePassword) {
+                fail = "Пароли не совпадают"
+            }
+
+            if (fail) {
+                alert(fail);
+            }
+            else {
+                document.location.reload();
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="" method="post" name="test" id="form">
+        <label for="name">Имя:</label>
+        <input type="text" name="name" placeholder="Имя" id="name"/>
+        <br />
+        <br />
+        <label for="email">Email:</label>
+        <input type="text" name="email" placeholder="Имя" id="email" required/>
+        <br />
+        <br />
+        <label for="password">Пароль:</label>
+        <input type="password" name="password" placeholder="Пароль" id="password" />
+        <br />
+        <br />
+        <label for="RePassword">Повторите пароль:</label>
+        <input type="password" name="RePassword" placeholder="Пароль" id="RePassword" />
+
+        <span>Пол</span>
+        <input type="radio" name="state" value="Мужской" id="male" checked/>
+        <label for="male">Мужской</label>
+        <input type="radio" name="state" value="Женский" id="female"/>
+        <label for="female">Женский</label>
+        <br />
+        <input type="button" name="submit" value="Готово" id="but"/>
+
+    </form>
+</body>
+<script>
+    let button = document.getElementById('but');
+    button.addEventListener('click', () => valid(document.getElementById('form')));
+</script>
+</html>
